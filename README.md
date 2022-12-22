@@ -9,7 +9,7 @@ Simply instantiate a Moderator object. The moderator will wait for chatbots to c
 ```python
 from chatbotsclient.moderator import Moderator
 
-chatbot = Moderator()
+moderator = Moderator()
 ```
 ### Chatbot
 #### Basic Setup
