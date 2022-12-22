@@ -1,7 +1,7 @@
 from typing import List
 
 import spacy
-from message import Message
+from .message import Message
 
 nlp = spacy.load("en_core_web_lg")
 
@@ -127,6 +127,8 @@ irrelevant_phrases = [
 ]
 
 # based on: https://stackoverflow.com/questions/28618400/how-to-identify-the-subject-of-a-sentence
+
+
 def get_subjects_and_objects(sentence):
     """Get Subject and Objects"""
     sent = nlp(sentence)

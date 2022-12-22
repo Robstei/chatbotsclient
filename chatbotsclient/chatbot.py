@@ -5,8 +5,8 @@ from typing import Callable, List, Union
 
 import pusher
 import pysher
-from bot import Bot
-from message import Message
+from .bot import Bot
+from .message import Message
 
 APP_ID = "1527636"
 KEY = "66736225056eacd969c1"
@@ -48,8 +48,13 @@ class Chatbot:
 
     def message_received(self, data):
         data = json.loads(data)
-        print(f"{data['bot_name']}: {data['message']}")
-        response = self.respond_method(data["message"], [])
+        message = Message(
+            bot_id=data["id"],
+            bot_name=data["name"],
+            message=data["message"]
+        )
+        print(f"{message.bot_name}: {message.message}")
+        response = self.respond_method(message, [])
         self.pusher_client.trigger(
             channels="chatting-chatbots",
             event_name="chatbot_response",
@@ -69,7 +74,8 @@ class Chatbot:
         self.pusher_client.trigger(
             channels="chatting-chatbots",
             event_name="chatbot_connection",
-            data=Bot(id=self.id, name=self.bot_name, method=self.method).to_json(),
+            data=Bot(id=self.id, name=self.bot_name,
+                     method=self.method).to_json(),
         )
         self.channel.bind(
             f"moderator_connection_{self.id}", self.connection_established

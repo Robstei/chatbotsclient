@@ -48,7 +48,8 @@ class Message:
     # endregion
 
     # region setters
-    @ranking_number.setter  # maybe ranking number should be read-only and only set by calculate_ranking_number
+    # maybe ranking number should be read-only and only set by calculate_ranking_number
+    @ranking_number.setter
     def ranking_number(self, value):
         self.__ranking_number = value
 

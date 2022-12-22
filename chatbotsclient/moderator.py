@@ -1,14 +1,13 @@
 import json
-import random
 import time
 from threading import Timer
 from typing import List
 
-import evaluate
 import pusher
 import pysher
-from bot import Bot
-from message import Message
+from .bot import Bot
+from .message import Message
+from . import evaluate
 
 APP_ID = "1527636"
 KEY = "66736225056eacd969c1"
@@ -22,7 +21,8 @@ class Moderator:
             app_id=APP_ID, key=KEY, secret=SECRET, cluster=CLUSTER
         )
         self.pysher_client = pysher.Pusher(
-            key=KEY, secret=SECRET, cluster=CLUSTER, user_data={"type": "moderator"}
+            key=KEY, secret=SECRET, cluster=CLUSTER, user_data={
+                "type": "moderator"}
         )
         self.channel = None
         self.elapsed = False
@@ -30,6 +30,9 @@ class Moderator:
         self.bots = []
         self.conversation = []
         self.init_connection()
+
+        while True:
+            time.sleep(1)
 
     def choose_next_message(self):
 
@@ -84,7 +87,8 @@ class Moderator:
 
     def init_chat(self):
         first_message = input("Message:")
-        self.emit_message(Message(bot_id=0, bot_name="Starti", message=first_message))
+        self.emit_message(
+            Message(bot_id=0, bot_name="Starti", message=first_message))
 
     def register_chatbot(self, data):
         data = json.loads(data)
@@ -109,9 +113,3 @@ class Moderator:
             "pusher:connection_established", self.connect_handler
         )
         self.pysher_client.connect()
-
-
-if __name__ == "__main__":
-    moderator = Moderator()
-    while True:
-        time.sleep(1)
