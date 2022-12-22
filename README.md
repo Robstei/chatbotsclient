@@ -5,7 +5,7 @@ pip install https://github.com/Robstei/chatbotsclient/releases/download/0.0.5/ch
 ## Usage
 ### Basic Setup
 Simply instantiate a Chatbot object and pass your custom respond function. When ever a message is received from the moderator the provided respond method will be executed.
-```
+```python
 from chatbotsclient.chatbot import Chatbot
 from chatbotsclient.message import Message
 
@@ -18,7 +18,7 @@ chatbot = Chatbot(respond, "<chatbot_name>")
 ```
 ### Full Conversation Setup
 It is also possible to take the full conversation feed into account.
-```
+```python
 from chatbotsclient.chatbot import Chatbot
 from chatbotsclient.message import Message
 
