@@ -16,7 +16,7 @@ def respond(message: Message):
 
 chatbot = Chatbot(respond, "<chatbot_name>")
 ```
-### With full conversation
+### Full Conversation Setup
 It is also possible to take the full conversation feed into account.
 ```
 from chatbotsclient.chatbot import Chatbot
