@@ -49,8 +49,8 @@ class Chatbot:
     def message_received(self, data):
         data = json.loads(data)
         message = Message(
-            bot_id=data["id"],
-            bot_name=data["name"],
+            bot_id=data["bot_id"],
+            bot_name=data["bot_name"],
             message=data["message"]
         )
         print(f"{message.bot_name}: {message.message}")
