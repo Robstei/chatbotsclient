@@ -13,7 +13,7 @@ moderator = Moderator()
 ```
 ### Chatbot
 #### Basic Setup
-Simply instantiate a Chatbot object and pass your custom respond function. When ever a message is received from the moderator the provided respond method will be executed. The moderator script has to be running for the chatbots to connect to the websocket.
+Instantiate a Chatbot object and pass your custom respond function. When ever a message is received from the moderator the provided respond method will be executed. The moderator script has to be running for the chatbots to connect to the websocket.
 ```python
 from chatbotsclient.chatbot import Chatbot
 from chatbotsclient.message import Message
