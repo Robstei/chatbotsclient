@@ -1,5 +1,5 @@
 venv
 dist
 __pycache__
-chatbots.egg-info
+chatbotsclient.egg-info
 .DS_Store
