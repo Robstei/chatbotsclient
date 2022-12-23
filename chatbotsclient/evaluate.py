@@ -153,29 +153,39 @@ def get_subjects_and_objects(sentence):
 
     return ret
 
-
 # this does not really check for topics in the classic nlp way, but if sentence subjects or objects of a message fit the ones in the past conversation
 def check_topic_similarity(
     full_conversation: List[Message],
     possible_next_message: Message,
     window_size: int = 5,
 ):
+    # clone and reverse conversation array, so that it starts with the last message
+    conv = full_conversation[:]
+    conv.reverse()
+    
     # get subjects and objects of message and conversation
     msg_phrases = get_subjects_and_objects(possible_next_message.message)
-    conv_phrases = []
-    for message in full_conversation[-window_size:]:
-        conv_phrases.extend(get_subjects_and_objects(message.message))
-
+    conv_entries = [''] * window_size
+    i = 0
+    for message in conv[-window_size:]:
+        conv_entries[i] = get_subjects_and_objects(message.message)
+        i += 1
+    
     relevance = 1
-    for conv_phrase in conv_phrases:
-        for msg_phrase in msg_phrases:
-            # calculate 'topic' similarity between a possible messsage and a conversation message
-            sim = nlp(msg_phrase).similarity(nlp(conv_phrase))
-            # print("Similarity is ",sim, " for '", msg_phrase, "' and '", conv_phrase, "'")
-            if sim >= 0.8:
-                possible_next_message.topic_score = sim * relevance
-                # no need to check further, because relevance will shrink the outcome anyway
-                return
+    sim = 0
+    for entry_phrases in conv_entries:
+        for entry_phrase in entry_phrases:
+            entry_doc = nlp(entry_phrase)
+            # check if conversation phrase and its word vector are valid
+            if(entry_doc and entry_doc.vector_norm):
+                for msg_phrase in msg_phrases:
+                    # calculate 'topic' similarity between a possible messsage and a conversation message
+                    sim = entry_doc.similarity(nlp(msg_phrase))
+                    #print("similarity is ",sim, " for '", msg_phrase, "' and '", entry_phrase, "'")
+                    if sim >= 0.8:
+                        possible_next_message.topic_score = sim * relevance
+                        # no need to check further, because relevance will shrink the outcome anyway
+                        return
 
         # relevance shrinks further down the conversation
         relevance = relevance * 0.9
