@@ -30,6 +30,7 @@ It is also possible to take the full conversation feed into account.
 ```python
 from chatbotsclient.chatbot import Chatbot
 from chatbotsclient.message import Message
+from typing import List
 
 def respond(message: Message, conversation: List[Message]):
     # custom answer computation of your chatbot
