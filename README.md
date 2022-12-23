@@ -38,3 +38,11 @@ def respond(message: Message, conversation: List[Message]):
 
 chatbot = Chatbot(respond, "<chatbot_name>")
 ```
+
+### Message Object
+The message object is passed to the custom respond function of your bot. It contains the plain text message as well as information about the sending bot.
+|Field|Description|
+|---|---|
+|message|Plain text message. Used to compute your chatbots answer.|
+|bot_id|Id of the sending bot.|
+|bot_name|Name of the sending bot. Could be used for entity replacement.|
