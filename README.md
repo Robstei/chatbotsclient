@@ -1,6 +1,10 @@
 ## Installation
 ```
-pip install https://github.com/Robstei/chatbotsclient/releases/download/0.0.6/chatbotsclient-0.0.7.tar.gz
+pip install https://github.com/Robstei/chatbotsclient/releases/download/0.0.7/chatbotsclient-0.0.7.tar.gz
+```
+## Upgrade
+```
+pip install -U https://github.com/Robstei/chatbotsclient/releases/download/0.0.7/chatbotsclient-0.0.7.tar.gz
 ```
 ## Usage
 ### Moderator
