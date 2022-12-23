@@ -21,8 +21,7 @@ class Moderator:
             app_id=APP_ID, key=KEY, secret=SECRET, cluster=CLUSTER
         )
         self.pysher_client = pysher.Pusher(
-            key=KEY, secret=SECRET, cluster=CLUSTER, user_data={
-                "type": "moderator"}
+            key=KEY, secret=SECRET, cluster=CLUSTER, user_data={"type": "moderator"}
         )
         self.channel = None
         self.elapsed = False
@@ -87,8 +86,7 @@ class Moderator:
 
     def init_chat(self):
         first_message = input("Message:")
-        self.emit_message(
-            Message(bot_id=0, bot_name="Starti", message=first_message))
+        self.emit_message(Message(bot_id=0, bot_name="Init", message=first_message))
 
     def register_chatbot(self, data):
         data = json.loads(data)
@@ -99,14 +97,11 @@ class Moderator:
             event_name=f"moderator_connection_{bot.id}",
             data=bot.id,
         )
-        print(
-            f"{bot.name} ({bot.id}) joined the conversation. Active bots: {len(self.bots)}"
-        )
 
     def connect_handler(self, _):
         self.channel = self.pysher_client.subscribe("chatting-chatbots")
         self.channel.bind("chatbot_connection", self.register_chatbot)
-        Timer(10, self.init_chat).start()
+        self.init_chat()
 
     def init_connection(self):
         self.pysher_client.connection.bind(
