@@ -1,6 +1,10 @@
 ## Installation
 ```
-pip install https://github.com/Robstei/chatbotsclient/releases/download/0.0.5/chatbotsclient-0.0.5.tar.gz
+pip install https://github.com/Robstei/chatbotsclient/releases/download/0.0.7/chatbotsclient-0.0.7.tar.gz
+```
+## Upgrade
+```
+pip install -U https://github.com/Robstei/chatbotsclient/releases/download/0.0.7/chatbotsclient-0.0.7.tar.gz
 ```
 ## Usage
 ### Moderator
@@ -30,6 +34,7 @@ It is also possible to take the full conversation feed into account.
 ```python
 from chatbotsclient.chatbot import Chatbot
 from chatbotsclient.message import Message
+from typing import List
 
 def respond(message: Message, conversation: List[Message]):
     # custom answer computation of your chatbot
@@ -38,3 +43,11 @@ def respond(message: Message, conversation: List[Message]):
 
 chatbot = Chatbot(respond, "<chatbot_name>")
 ```
+
+### Message Object
+The message object is passed to the custom respond function of your bot. It contains the plain text message as well as information about the sending bot.
+|Field|Description|
+|---|---|
+|message|Plain text message. Used to compute your chatbots answer.|
+|bot_id|Id of the sending bot.|
+|bot_name|Name of the sending bot. Could be used for entity replacement.|
