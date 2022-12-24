@@ -91,5 +91,9 @@ class Message:
                 "message": self.message,
                 "bot_id": self.bot_id,
                 "bot_name": self.bot_name,
+                "topic_score": self.topic_score,
+                "similarity_score": self.similarity_score,
+                "share_score": self.share_score,
+                "message_lemma": self.message_lemma,
             }
         )

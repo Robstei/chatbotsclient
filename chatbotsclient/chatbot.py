@@ -40,6 +40,7 @@ class Chatbot:
         )
         self.elapsed = False
         self.answers = []
+        self.conversation = []
         self.init_connection()
         self.respond_method = respond_method
 
@@ -49,12 +50,11 @@ class Chatbot:
     def message_received(self, data):
         data = json.loads(data)
         message = Message(
-            bot_id=data["bot_id"],
-            bot_name=data["bot_name"],
-            message=data["message"]
+            bot_id=data["bot_id"], bot_name=data["bot_name"], message=data["message"]
         )
+        self.conversation.append(message)
         print(f"{message.bot_name}: {message.message}")
-        response = self.respond_method(message, [])
+        response = self.respond_method(message, self.conversation)
         self.pusher_client.trigger(
             channels="chatting-chatbots",
             event_name="chatbot_response",
