@@ -1,4 +1,9 @@
 ## Installation
+### Reqirements
+```
+python -m spacy download en_core_web_lg
+```
+### Install
 ```
 pip install https://github.com/Robstei/chatbotsclient/releases/download/1.0.0/chatbotsclient-1.0.0.tar.gz
 ```
