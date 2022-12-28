@@ -74,7 +74,7 @@ The message object is passed to the custom respond function of your bot. It cont
 The moderator ranks all incoming message by following criteria:
 |Field|Description|
 |---|---|
-|Similarity|To fit the previos message, but also to prevent looping conversations.|
-|Conversation share|To ensure a varied conversation.|
+|Similarity|To fit the previous message, but also to prevent looping conversations|
+|Conversation share|To ensure a varied conversation|
 |Topic|Subject fitting|
 
