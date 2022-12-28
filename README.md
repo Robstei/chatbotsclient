@@ -26,7 +26,7 @@ Before connecting your chatbot to the conversation wait for the moderator to pro
 
 ### Chatbot
 #### Basic Setup
-Instantiate a Chatbot object and pass your custom respond function. When ever a message is received from the moderator the provided respond method will be executed. The moderator script has to be running for the chatbots to connect to the websocket.
+Instantiate a Chatbot object and pass your custom respond function. When ever a message is received from the moderator the provided respond method will be executed. The moderator script has to be running in first place.
 ```python
 from chatbotsclient.chatbot import Chatbot
 from chatbotsclient.message import Message
