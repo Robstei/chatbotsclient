@@ -48,7 +48,7 @@ from chatbotsclient.message import Message
 from typing import List
 
 def respond(message: Message, conversation: List[Message]):
-    # custom answer computation of your chatbot
+    # custom answer computation of your chatbot ignoring the fill conversation list
     answer = compute(message.message)
     return answer
 
