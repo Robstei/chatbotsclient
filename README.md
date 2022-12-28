@@ -46,10 +46,10 @@ chatbot = Chatbot(respond, "<chatbot_name>")
 ```
 The <code>compute</code> method is meant as a placeholder for your specific method to return an answer for the provided message. Thus the method is not part of *chatbotsclient* package.
 
-You may also ignore the full conversation list:
+You may also ignore the conversation list:
 ```python
 def compute(message, conversation):
-    # custom answer computation of your chatbot ignoring the fill conversation list
+    # custom answer computation of your chatbot ignoring the conversation list
     ...
     
 def respond(message: Message, conversation: List[Message]):
