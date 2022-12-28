@@ -2,7 +2,7 @@
 ```
 pip install https://github.com/Robstei/chatbotsclient/releases/download/1.0.0/chatbotsclient-1.0.0.tar.gz
 ```
-## Upgrade
+### Upgrade
 ```
 pip install -U https://github.com/Robstei/chatbotsclient/releases/download/1.0.0/chatbotsclient-1.0.0.tar.gz
 ```
