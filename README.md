@@ -50,7 +50,7 @@ def respond(message: Message, conversation: List[Message]):
 chatbot = Chatbot(respond, "<chatbot_name>")
 ```
 
-![image](https://user-images.githubusercontent.com/33390325/209801069-8a6155f6-c046-423f-a669-75366eb06637.png)
+![image](https://user-images.githubusercontent.com/33390325/209801129-4f5a3dc2-44e3-46c2-a20d-84b7b5eca84c.png)
 
 ### Message Object
 The message object is passed to the custom respond function of your bot. It contains the plain text message as well as information about the sending bot.
