@@ -65,7 +65,7 @@ A <code>Message</code> object is passed to the custom respond function of your b
 
 ### Ranking scores
 The moderator ranks all incoming message by following criteria:
-|Field|Description|
+|Method|Description|
 |---|---|
 |Similarity|To fit the previous message, but also to prevent looping conversations|
 |Conversation share|To ensure a varied conversation|
