@@ -57,7 +57,7 @@ class Moderator:
             self.emit_message(self.choose_next_message())
 
     def wait_for_responses(self, message):
-        timeout = len(message.message.split())
+        timeout = (len(message.message) * 0.1) + 1
         Timer(timeout, self.make_elapsed).start()
 
     def emit_message(self, message: Message):
@@ -84,20 +84,18 @@ class Moderator:
             self.emit_message(message)
 
     def init_chat(self):
-        first_message = input("Message:")
+        first_message = input("Message: ")
         self.emit_message(
-            Message(bot_id=0, bot_name="Init", message=first_message))
+            Message(bot_id=0, bot_name="Initial message",
+                    message=first_message)
+        )
         self.channel.bind("chatbot_response", self.add_response)
 
     def register_chatbot(self, data):
         data = json.loads(data)
         bot = Bot(id=data["id"], name=data["name"], method=data["method"])
         self.bots.append(bot)
-        self.pusher_client.trigger(
-            channels="chatting-chatbots",
-            event_name=f"moderator_connection_{bot.id}",
-            data=bot.id,
-        )
+        # self.pusher_client.trigger(channels="chatting-chatbots", event_name=f"moderator_connection_{bot.id}",data=bot.id)
 
     def connect_handler(self, _):
         self.channel = self.pysher_client.subscribe("chatting-chatbots")

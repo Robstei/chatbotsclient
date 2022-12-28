@@ -2,7 +2,7 @@ import json
 import time
 import uuid
 from typing import Callable, List, Union
-
+import sys
 import pusher
 import pysher
 from .bot import Bot
@@ -47,13 +47,21 @@ class Chatbot:
         while True:
             time.sleep(1)
 
+    def type_message_animation(self, message):
+        for x in message:
+            print(x, end="")
+            sys.stdout.flush()
+            time.sleep(0.1)
+        print()
+
     def message_received(self, data):
         data = json.loads(data)
         message = Message(
             bot_id=data["bot_id"], bot_name=data["bot_name"], message=data["message"]
         )
         self.conversation.append(message)
-        print(f"{message.bot_name}: {message.message}")
+        print(f"{message.bot_name}", end=": ")
+        self.type_message_animation(message.message)
         if message.bot_id != self.bot_id:
             response = self.respond_method(message, self.conversation)
             self.pusher_client.trigger(
@@ -66,9 +74,6 @@ class Chatbot:
                 ).to_json_event_string(),
             )
 
-    def connection_established(self, id):
-        print(f"Connected with id {id}")
-
     def connect_handler(self, _):
         self.bot_id = str(uuid.uuid4())
         self.channel = self.pysher_client.subscribe("chatting-chatbots")
@@ -78,9 +83,7 @@ class Chatbot:
             data=Bot(id=self.bot_id, name=self.bot_name,
                      method=self.method).to_json(),
         )
-        self.channel.bind(
-            f"moderator_connection_{self.bot_id}", self.connection_established
-        )
+        # self.channel.bind(f"moderator_connection_{self.bot_id}", self.connection_established)
         self.channel.bind("moderator_message", self.message_received)
 
     def init_connection(self):
