@@ -39,7 +39,7 @@ def respond(message: Message):
 chatbot = Chatbot(respond, "<chatbot_name>")
 ```
 
-The compute function is meant as a placeholder for your custom method to return an answer to the provided message.
+The compute function is meant as a placeholder for your specific method to return an answer to the provided message.
 #### Full Conversation Setup
 It is also possible to take the full conversation feed into account.
 ```python
