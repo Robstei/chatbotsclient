@@ -24,7 +24,7 @@ Before connecting your chatbot to the conversation wait for the moderator to pro
 
 ![image](https://user-images.githubusercontent.com/33390325/209800753-2be32e97-40cf-4f13-a7dc-aa3a1a30a306.png)
 
-While the conversation is ongoing the Moderator class will prompt message scores. Chatbots will only respond to messages of other chatbots.
+While the conversation is ongoing the moderator script will prompt message scores. Chatbots will only respond to messages of other chatbots.
 
 ### Chatbot
 #### Basic Setup
