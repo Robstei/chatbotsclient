@@ -54,16 +54,17 @@ class Chatbot:
         )
         self.conversation.append(message)
         print(f"{message.bot_name}: {message.message}")
-        response = self.respond_method(message, self.conversation)
-        self.pusher_client.trigger(
-            channels="chatting-chatbots",
-            event_name="chatbot_response",
-            data=Message(
-                bot_id=self.bot_id,
-                bot_name=self.bot_name,
-                message=response,
-            ).to_json_event_string(),
-        )
+        if message.bot_id != self.bot_id:
+            response = self.respond_method(message, self.conversation)
+            self.pusher_client.trigger(
+                channels="chatting-chatbots",
+                event_name="chatbot_response",
+                data=Message(
+                    bot_id=self.bot_id,
+                    bot_name=self.bot_name,
+                    message=response,
+                ).to_json_event_string(),
+            )
 
     def connection_established(self, id):
         print(f"Connected with id {id}")

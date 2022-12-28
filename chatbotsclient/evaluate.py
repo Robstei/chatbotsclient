@@ -47,7 +47,8 @@ def check_conversation_shares(conversation: List[Message], message: Message):
 
     if message.bot_id in bot_message_count_dict.keys():
         share = (
-            bot_message_count_dict[message.bot_id] / conversation_message_count) * 100
+            bot_message_count_dict[message.bot_id] / conversation_message_count
+        ) * 100
         normalized_share_score = share / 100
         message.share_score = 1 - normalized_share_score
     else:
@@ -59,8 +60,6 @@ def select_highest_rated_message(ranked_messages: List[Message]):
     for message in ranked_messages[1:]:
         if message.ranking_number > highest_rated_message.ranking_number:
             highest_rated_message = message
-
-    print(type(highest_rated_message))
     return highest_rated_message
 
 
@@ -104,8 +103,6 @@ irrelevant_phrases = [
     "ourselves",
     "yourselves",
     "themselves",
-
-
 ]
 
 # based on: https://stackoverflow.com/questions/28618400/how-to-identify-the-subject-of-a-sentence
@@ -120,13 +117,13 @@ def get_subjects_and_objects(sentence):
             subtree = list(token.subtree)
             start = subtree[0].i
             end = subtree[-1].i + 1
-            ret.append(str(sent[start: end]).lower())
+            ret.append(str(sent[start:end]).lower())
 
         if "dobj" in token.dep_:
             subtree = list(token.subtree)
             start = subtree[0].i
             end = subtree[-1].i + 1
-            ret.append(str(sent[start: end]).lower())
+            ret.append(str(sent[start:end]).lower())
 
     # remove irrelevant subjects and objects like i or they
     for phrase in irrelevant_phrases:
@@ -134,6 +131,7 @@ def get_subjects_and_objects(sentence):
             ret.remove(phrase)
 
     return ret
+
 
 # this does not really check for topics in the classic nlp way, but if sentence subjects or objects of a message fit the ones in the past conversation
 def check_topic_similarity(
@@ -144,26 +142,26 @@ def check_topic_similarity(
     # clone and reverse conversation array, so that it starts with the last message
     conv = full_conversation[:]
     conv.reverse()
-    
+
     # get subjects and objects of message and conversation
     msg_phrases = get_subjects_and_objects(possible_next_message.message)
-    conv_entries = [''] * window_size
+    conv_entries = [""] * window_size
     i = 0
     for message in conv[-window_size:]:
         conv_entries[i] = get_subjects_and_objects(message.message)
         i += 1
-    
+
     relevance = 1
     sim = 0
     for entry_phrases in conv_entries:
         for entry_phrase in entry_phrases:
             entry_doc = nlp(entry_phrase)
             # check if conversation phrase and its word vector are valid
-            if(entry_doc and entry_doc.vector_norm):
+            if entry_doc and entry_doc.vector_norm:
                 for msg_phrase in msg_phrases:
                     # calculate 'topic' similarity between a possible messsage and a conversation message
                     sim = entry_doc.similarity(nlp(msg_phrase))
-                    #print("similarity is ",sim, " for '", msg_phrase, "' and '", entry_phrase, "'")
+                    # print("similarity is ",sim, " for '", msg_phrase, "' and '", entry_phrase, "'")
                     if sim >= 0.8:
                         possible_next_message.topic_score = sim * relevance
                         # no need to check further, because relevance will shrink the outcome anyway

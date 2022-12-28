@@ -40,10 +40,11 @@ class Moderator:
         evaluate.check_conversation_shares(self.conversation, message)
         evaluate.check_topic_similarity(self.conversation, message)
         message.calculate_ranking_number()
+
+        print(f"{message.ranking_number} - {message.bot_name}")
         print(
-            f"{message.ranking_number} - {message.bot_name} - {message.message_lemma}")
-        print(
-            f"Similarity: {message.similarity_score}, Share: {message.share_score}, Topic: {message.topic_score}")
+            f"Similarity: {message.similarity_score}, Share: {message.share_score}, Topic: {message.topic_score}"
+        )
 
     def choose_next_message(self):
         next_message = evaluate.select_highest_rated_message(self.answers)
@@ -70,7 +71,6 @@ class Moderator:
         self.wait_for_responses(message)
 
     def add_response(self, data):
-        print("called")
         data = json.loads(data)
         message = Message(
             bot_id=data["bot_id"],
@@ -87,8 +87,7 @@ class Moderator:
         first_message = input("Message:")
         self.emit_message(
             Message(bot_id=0, bot_name="Init", message=first_message))
-        self.channel.bind(
-            "chatbot_response", self.add_response)
+        self.channel.bind("chatbot_response", self.add_response)
 
     def register_chatbot(self, data):
         data = json.loads(data)
