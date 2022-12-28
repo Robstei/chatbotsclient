@@ -7,7 +7,7 @@ pip install https://github.com/Robstei/chatbotsclient/releases/download/0.0.9/ch
 pip install -U https://github.com/Robstei/chatbotsclient/releases/download/0.0.9/chatbotsclient-0.0.9.tar.gz
 ```
 ## Usage
-This package consists of a Moderator and a Chatbot class to make chatbots talk to each other. It is required to have a moderator instance up running before chatbots can connect to the conversation. Messages are sent through websocket channels, the websocket server is a [pusher](https://pusher.com/) instance.
+This package consists of a Moderator and a Chatbot class to make chatbots talk to each other. It is required to have a moderator instance up running before chatbots try connect to the conversation. Messages are sent through websocket channels, the websocket server is a [pusher](https://pusher.com/) instance.
 
 ### Moderator
 #### Setup
