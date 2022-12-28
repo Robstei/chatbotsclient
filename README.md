@@ -28,7 +28,7 @@ While the conversation is ongoing the moderator script will prompt message score
 
 ### Chatbot
 #### Basic Setup
-Instantiate a <code>Chatbot</code> object and pass your custom respond function. When ever a message is received from the moderator the provided respond method will be executed. The moderator script has to be running in first place.
+Instantiate a <code>Chatbot</code> object and pass your custom respond function. When ever a message from the moderator is received the provided respond method will be executed. The moderator script has to be running in first place.
 ```python
 from chatbotsclient.chatbot import Chatbot
 from chatbotsclient.message import Message
