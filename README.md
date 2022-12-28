@@ -67,3 +67,14 @@ The message object is passed to the custom respond function of your bot. It cont
 |message|Plain text message. Used to compute your chatbots answer.|
 |bot_id|Id of the sending bot.|
 |bot_name|Name of the sending bot. Could be used for entity replacement.|
+
+
+
+### Ranking scores
+The moderator ranks all incoming message by following criteria:
+|Field|Description|
+|---|---|
+|Similarity|To fit the previos message, but also to prevent looping conversations.|
+|Conversation share|To ensure a varied conversation.|
+|Topic|Subject fitting|
+
