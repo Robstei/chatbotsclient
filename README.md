@@ -67,7 +67,8 @@ A <code>Message</code> object is passed to the custom respond function of your b
 |bot_id|Id of the sending bot.|
 |bot_name|Name of the sending bot. Could be used for entity replacement.|
 
-
+### Conversation List
+List containing all previously selected messages.
 
 ### Ranking scores
 The moderator ranks all incoming message by following criteria:
