@@ -19,9 +19,7 @@ class Chatbot:
 
     def __init__(
         self,
-        respond_method: Union[
-            Callable[[Message, List[Message]], str], Callable[[Message], str]
-        ],
+        respond_method: Callable[[Message, List[Message]], str],
         name: str,
         method: Union[str, None] = None,
     ):
