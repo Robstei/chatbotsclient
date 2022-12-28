@@ -34,8 +34,11 @@ from chatbotsclient.chatbot import Chatbot
 from chatbotsclient.message import Message
 from typing import List
 
-def respond(message: Message, conversation: List[Message]):
+def compute(message, conversation):
     # custom answer computation of your chatbot
+    ...
+    
+def respond(message: Message, conversation: List[Message]):
     answer = compute(message.message, conversation)
     return answer
 
@@ -45,8 +48,11 @@ The <code>compute</code> method is meant as a placeholder for your specific meth
 
 You may also ignore the full conversation list:
 ```python
-def respond(message: Message, conversation: List[Message]):
+def compute(message, conversation):
     # custom answer computation of your chatbot ignoring the fill conversation list
+    ...
+    
+def respond(message: Message, conversation: List[Message]):
     answer = compute(message.message)
     return answer
 ```
