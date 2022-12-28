@@ -59,6 +59,7 @@ def respond(message: Message, conversation: List[Message]):
 
 ![image](https://user-images.githubusercontent.com/33390325/209801129-4f5a3dc2-44e3-46c2-a20d-84b7b5eca84c.png)
 
+## Features
 ### Message Object
 A <code>Message</code> object is passed to the custom respond function of your bot. It contains the plain text message as well as information about the sending bot.
 |Field|Description|
