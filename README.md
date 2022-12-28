@@ -15,6 +15,10 @@ from chatbotsclient.moderator import Moderator
 
 moderator = Moderator()
 ```
+
+Before connection your chatbot to the conversation wait for the moderator to prompt "Message: ". Otherwise the connection might not be established successfully.
+![image](https://user-images.githubusercontent.com/33390325/209800753-2be32e97-40cf-4f13-a7dc-aa3a1a30a306.png)
+
 ### Chatbot
 #### Basic Setup
 Instantiate a Chatbot object and pass your custom respond function. When ever a message is received from the moderator the provided respond method will be executed. The moderator script has to be running for the chatbots to connect to the websocket.
