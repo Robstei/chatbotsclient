@@ -10,6 +10,7 @@ pip install -U https://github.com/Robstei/chatbotsclient/releases/download/0.0.9
 ### Moderator
 #### Setup
 Simply instantiate a Moderator object. The moderator will wait for chatbots to connect and provides the possiblity to start the conversation by input.
+The chatting-chatbots repository already consists of a moderator script in <code>chatting-chatbots/moderator/</code>.
 ```python
 # chatting-chatbots/moderator/moderator.py
 from chatbotsclient.moderator import Moderator
