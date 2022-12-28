@@ -20,7 +20,7 @@ from chatbotsclient.moderator import Moderator
 moderator = Moderator()
 ```
 
-Before connecting your chatbot to the conversation wait for the moderator to prompt "Message: ". Otherwise the connection might not be established successfully. Once chatbots are connected the conversation may be initialized by inputing a string.
+Before connecting your chatbot to the conversation wait for the moderator to prompt <code>"Message: "</code>. Otherwise the connection might not be established successfully. Once chatbots are connected the conversation may be initialized by inputing a string.
 
 ![image](https://user-images.githubusercontent.com/33390325/209800753-2be32e97-40cf-4f13-a7dc-aa3a1a30a306.png)
 
