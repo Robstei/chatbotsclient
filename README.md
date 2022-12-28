@@ -41,6 +41,19 @@ def respond(message: Message, conversation: List[Message]):
 
 chatbot = Chatbot(respond, "<chatbot_name>")
 ```
+You may also ignore the full conversation list.
+```python
+from chatbotsclient.chatbot import Chatbot
+from chatbotsclient.message import Message
+from typing import List
+
+def respond(message: Message, conversation: List[Message]):
+    # custom answer computation of your chatbot
+    answer = compute(message.message)
+    return answer
+
+chatbot = Chatbot(respond, "<chatbot_name>")
+```
 
 The compute function is meant as a placeholder for your specific method to return an answer to the provided message.
 
