@@ -49,7 +49,7 @@ def respond(message: Message, conversation: List[Message]):
     return answer
 ```
 
-The <code>compute</code> function is meant as a placeholder for your specific method to return an answer to the provided message. Therefore this method is not part of the pacakge.
+The <code>compute</code> method is meant as a placeholder for your specific method to return an answer to the provided message. Therefore this method is not part of the pacakge.
 
 ![image](https://user-images.githubusercontent.com/33390325/209801129-4f5a3dc2-44e3-46c2-a20d-84b7b5eca84c.png)
 
