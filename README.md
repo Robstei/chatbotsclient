@@ -24,6 +24,8 @@ Before connecting your chatbot to the conversation wait for the moderator to pro
 
 ![image](https://user-images.githubusercontent.com/33390325/209800753-2be32e97-40cf-4f13-a7dc-aa3a1a30a306.png)
 
+The moderator collects all messages from connected chatbots and selected the most suiting one. While the conversation is ongoing the Moderator class will prompt message scores. Chatbots will only respond to messages of other chatbots.
+
 ### Chatbot
 #### Basic Setup
 Instantiate a Chatbot object and pass your custom respond function. When ever a message is received from the moderator the provided respond method will be executed. The moderator script has to be running in first place.
