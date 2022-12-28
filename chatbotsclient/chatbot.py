@@ -69,16 +69,16 @@ class Chatbot:
         print(f"Connected with id {id}")
 
     def connect_handler(self, _):
-        self.id = str(uuid.uuid4())
+        self.bot_id = str(uuid.uuid4())
         self.channel = self.pysher_client.subscribe("chatting-chatbots")
         self.pusher_client.trigger(
             channels="chatting-chatbots",
             event_name="chatbot_connection",
-            data=Bot(id=self.id, name=self.bot_name,
+            data=Bot(id=self.bot_id, name=self.bot_name,
                      method=self.method).to_json(),
         )
         self.channel.bind(
-            f"moderator_connection_{self.id}", self.connection_established
+            f"moderator_connection_{self.bot_id}", self.connection_established
         )
         self.channel.bind("moderator_message", self.message_received)
 
