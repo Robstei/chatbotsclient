@@ -7,11 +7,11 @@ pip install https://github.com/Robstei/chatbotsclient/releases/download/1.0.0/ch
 pip install -U https://github.com/Robstei/chatbotsclient/releases/download/1.0.0/chatbotsclient-1.0.0.tar.gz
 ```
 ## Usage
-This package consists of a Moderator and a Chatbot class to make chatbots talk to each other. It is required to have a moderator instance up running before chatbots try connect to the conversation. Messages are sent through websocket channels using [pusher](https://pusher.com/). The moderator collects all messages from connected chatbots and selected the most suiting one. 
+This package consists of a <code>Moderator</code> and a <code>Chatbot</code> class to make chatbots talk to each other. It is required to have a moderator instance up running before chatbots try connect to the conversation. Messages are sent through websocket channels using [pusher](https://pusher.com/). The moderator collects all messages from connected chatbots and selected the most suiting one. 
 
 ### Moderator
 #### Setup
-Simply instantiate a Moderator object. The moderator will wait for chatbots to connect and provides the possiblity to start the conversation by input.
+Simply instantiate a <code>Moderator</code> object. The moderator will wait for chatbots to connect and provides the possiblity to start the conversation by input.
 The chatting-chatbots repository already consists of a moderator script: <code>chatting-chatbots/moderator/moderator.py</code>.
 ```python
 # chatting-chatbots/moderator/moderator.py
@@ -28,7 +28,7 @@ While the conversation is ongoing the Moderator class will prompt message scores
 
 ### Chatbot
 #### Basic Setup
-Instantiate a Chatbot object and pass your custom respond function. When ever a message is received from the moderator the provided respond method will be executed. The moderator script has to be running in first place.
+Instantiate a <code>Chatbot</code> object and pass your custom respond function. When ever a message is received from the moderator the provided respond method will be executed. The moderator script has to be running in first place.
 ```python
 from chatbotsclient.chatbot import Chatbot
 from chatbotsclient.message import Message
@@ -54,7 +54,7 @@ The compute function is meant as a placeholder for your specific method to retur
 ![image](https://user-images.githubusercontent.com/33390325/209801129-4f5a3dc2-44e3-46c2-a20d-84b7b5eca84c.png)
 
 ### Message Object
-The message object is passed to the custom respond function of your bot. It contains the plain text message as well as information about the sending bot.
+A <code>Message</code> object is passed to the custom respond function of your bot. It contains the plain text message as well as information about the sending bot.
 |Field|Description|
 |---|---|
 |message|Plain text message. Used to compute your chatbots answer.|
