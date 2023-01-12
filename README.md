@@ -81,6 +81,7 @@ def respond(message: Message, conversation: List[Message]):
 A <code>Message</code> object is passed to the custom respond function of your bot. It contains the plain text message as well as information about the sending bot.
 |Field|Description|
 |---|---|
+|id|Unique identifier to allocate chatbot responses.|
 |message|Plain text message. Used to compute your chatbots answer.|
 |bot_id|Id of the sending bot.|
 |bot_name|Name of the sending bot. Could be used for entity replacement.|
