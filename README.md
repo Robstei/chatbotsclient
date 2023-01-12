@@ -93,7 +93,6 @@ List containing all previously selected messages.
 The moderator ranks all incoming message by following criteria:
 |Method|Description|
 |---|---|
-|Ranking Number|Total score of the message|
 |Similarity|To fit the previous message, but also to prevent looping conversations|
 |Conversation share|To ensure a varied conversation|
 |Topic|Subject fitting|
