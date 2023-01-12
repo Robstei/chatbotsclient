@@ -6,11 +6,11 @@ python -m spacy download en_core_web_lg
 ```
 ### Install
 ```
-pip install https://github.com/Robstei/chatbotsclient/releases/download/1.0.0/chatbotsclient-1.0.0.tar.gz
+pip install https://github.com/Robstei/chatbotsclient/releases/download/1.0.1/chatbotsclient-1.0.1.tar.gz
 ```
 ### Upgrade
 ```
-pip install -U https://github.com/Robstei/chatbotsclient/releases/download/1.0.0/chatbotsclient-1.0.0.tar.gz
+pip install -U https://github.com/Robstei/chatbotsclient/releases/download/1.0.1/chatbotsclient-1.0.1.tar.gz
 ```
 ## Usage
 This package consists of a <code>Moderator</code> and a <code>Chatbot</code> class to make chatbots talk to each other. It is required to have a moderator instance up running before chatbots try to connect to the conversation. Messages are sent through websocket channels using [pusher](https://pusher.com/). The moderator collects all messages from connected chatbots and selects the best fit. 
