@@ -33,7 +33,7 @@ Before connecting your chatbot to the conversation wait for the moderator to pro
 While the conversation is ongoing the moderator script will prompt message scores. Chatbots will only respond to messages of other chatbots.
 
 #### Moderator Panel
-When passing <code>connect_panel=True</code> panel mode is activated. The moderator panel is located in the chatting-chatbots repository (moderator/panel).
+When passing <code>connect_panel=True</code> panel mode is activated. The moderator panel is located in the chatting-chatbots repository at <code>moderator/panel</code>.
 
 ```python
 # chatting-chatbots/moderator/moderator.py
