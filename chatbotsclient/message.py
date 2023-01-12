@@ -2,7 +2,8 @@ import json
 
 
 class Message:
-    def __init__(self, message, bot_id, bot_name):
+    def __init__(self, id, message, bot_id, bot_name):
+        self.__id = id
         self.__message = message
         self.__message_lemma = message
         self.__bot_id = bot_id
@@ -13,6 +14,10 @@ class Message:
         self.__topic_score = 0.0
 
     # region getters
+    @property
+    def id(self):
+        return self.__id
+
     @property
     def message(self):
         return self.__message
@@ -87,6 +92,7 @@ class Message:
     def to_json_event_string(self) -> str:
         return json.dumps(
             {
+                "id": self.id,
                 "type": "message",
                 "message": self.message,
                 "bot_id": self.bot_id,
@@ -94,6 +100,7 @@ class Message:
                 "topic_score": self.topic_score,
                 "similarity_score": self.similarity_score,
                 "share_score": self.share_score,
+                "ranking_number": self.ranking_number,
                 "message_lemma": self.message_lemma,
             }
         )

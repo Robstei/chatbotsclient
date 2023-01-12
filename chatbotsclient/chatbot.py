@@ -2,7 +2,6 @@ import json
 import time
 import uuid
 from typing import Callable, List, Union
-import sys
 import pusher
 import pysher
 from .bot import Bot
@@ -45,27 +44,22 @@ class Chatbot:
         while True:
             time.sleep(1)
 
-    def type_message_animation(self, message):
-        for x in message:
-            print(x, end="")
-            sys.stdout.flush()
-            time.sleep(0.1)
-        print()
-
     def message_received(self, data):
+        print(data)
         data = json.loads(data)
         message = Message(
-            bot_id=data["bot_id"], bot_name=data["bot_name"], message=data["message"]
+            id=data["id"], bot_id=data["bot_id"], bot_name=data["bot_name"], message=data["message"]
         )
         self.conversation.append(message)
         print(f"{message.bot_name}", end=": ")
-        self.type_message_animation(message.message)
+        print(message.message)
         if message.bot_id != self.bot_id:
             response = self.respond_method(message, self.conversation)
             self.pusher_client.trigger(
                 channels="chatting-chatbots",
-                event_name="chatbot_response",
+                event_name=f"chatbot_response_{message.id}",
                 data=Message(
+                    id=str(uuid.uuid4()),
                     bot_id=self.bot_id,
                     bot_name=self.bot_name,
                     message=response,

@@ -5,12 +5,10 @@ from .message import Message
 nlp = spacy.load("en_core_web_lg")
 
 
-def check_sentence_similarity(conversation: List[Message], message: Message) -> None:
+def check_sentence_similarity(conversation: List[Message], message: Message, current_message: Message) -> None:
     """Check Conversation Shares"""
-    if len(conversation) == 0:
-        return
 
-    prev_message = conversation[-1].message_lemma
+    prev_message = current_message.message_lemma
     prev_message_doc = nlp(prev_message)
 
     message_doc = nlp(message.message_lemma)

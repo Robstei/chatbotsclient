@@ -5,4 +5,4 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "chatbotsclient"
 version = "1.0.0"
-dependencies = ["pusher", "pysher", "spacy", "en_core_web_lg"]
+dependencies = ["pusher", "pysher", "spacy", "Flask", "Flask-Cors"]
