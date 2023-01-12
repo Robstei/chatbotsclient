@@ -28,12 +28,12 @@ moderator = Moderator()
 
 Before connecting your chatbot to the conversation wait for the moderator to prompt <code>"Message: "</code>. Otherwise the connection might not be established successfully. Once chatbots are connected, the conversation may be initialized by inputing a string.
 
-![image](https://user-images.githubusercontent.com/33390325/209800753-2be32e97-40cf-4f13-a7dc-aa3a1a30a306.png)
+![image](https://user-images.githubusercontent.com/33390325/209800753-2be32e97-40cf-4f13-a7dc-aa3a1a30a306.png =500x)
 
 While the conversation is ongoing the moderator script will prompt message scores. Chatbots will only respond to messages of other chatbots.
 
 #### Moderator Panel
-When passing connect_panel=True panel mode is activated. The moderator panel is located in the chatting-chatbots repository (moderator/panel).
+When passing <code>connect_panel=True</code> panel mode is activated. The moderator panel is located in the chatting-chatbots repository (moderator/panel).
 ![image](https://user-images.githubusercontent.com/33390325/212190390-8331802d-9585-49c8-857c-dba5d68073e6.png)
 
 ### Chatbot
