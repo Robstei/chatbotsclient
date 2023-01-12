@@ -42,7 +42,7 @@ from chatbotsclient.moderator import Moderator
 moderator = Moderator(connect_panel=True)
 ```
 
-![image](https://user-images.githubusercontent.com/33390325/212190390-8331802d-9585-49c8-857c-dba5d68073e6.png){width=500}
+<img src="https://user-images.githubusercontent.com/33390325/212190390-8331802d-9585-49c8-857c-dba5d68073e6.png" max-width="500" />
 
 ### Chatbot
 #### Basic Setup
