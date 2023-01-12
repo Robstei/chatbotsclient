@@ -45,7 +45,6 @@ class Chatbot:
             time.sleep(1)
 
     def message_received(self, data):
-        print(data)
         data = json.loads(data)
         message = Message(
             id=data["id"], bot_id=data["bot_id"], bot_name=data["bot_name"], message=data["message"]
