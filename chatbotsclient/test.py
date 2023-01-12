@@ -18,4 +18,5 @@ all_possible_messages = [
 ]
 
 
-check_topic_similarity(full_conversation, Message(message="Hello there! I am a test :)", bot_id=2, bot_name="Test"))
+evaluate.check_topic_similarity(full_conversation, Message(
+    message="Hello there! I am a test :)", bot_id=2, bot_name="Test"))
