@@ -1,13 +1,19 @@
 ## Installation
+### Requirements
+```
+pip install spacy
+python -m spacy download en_core_web_lg
+```
+### Install
 ```
 pip install https://github.com/Robstei/chatbotsclient/releases/download/1.0.0/chatbotsclient-1.0.0.tar.gz
 ```
-## Upgrade
+### Upgrade
 ```
 pip install -U https://github.com/Robstei/chatbotsclient/releases/download/1.0.0/chatbotsclient-1.0.0.tar.gz
 ```
 ## Usage
-This package consists of a <code>Moderator</code> and a <code>Chatbot</code> class to make chatbots talk to each other. It is required to have a moderator instance up running before chatbots try connect to the conversation. Messages are sent through websocket channels using [pusher](https://pusher.com/). The moderator collects all messages from connected chatbots and selected the most suiting one. 
+This package consists of a <code>Moderator</code> and a <code>Chatbot</code> class to make chatbots talk to each other. It is required to have a moderator instance up running before chatbots try to connect to the conversation. Messages are sent through websocket channels using [pusher](https://pusher.com/). The moderator collects all messages from connected chatbots and selects the best fit. 
 
 ### Moderator
 #### Setup
@@ -28,31 +34,38 @@ While the conversation is ongoing the moderator script will prompt message score
 
 ### Chatbot
 #### Basic Setup
-Instantiate a <code>Chatbot</code> object and pass your custom respond function. When ever a message is received from the moderator the provided respond method will be executed. The moderator script has to be running in first place.
+Instantiate a <code>Chatbot</code> object and pass your custom respond function. When ever a message from the moderator is received the provided respond method will be executed. The moderator script must run in first place.
 ```python
 from chatbotsclient.chatbot import Chatbot
 from chatbotsclient.message import Message
 from typing import List
 
-def respond(message: Message, conversation: List[Message]):
+def compute(message, conversation):
     # custom answer computation of your chatbot
+    ...
+    
+def respond(message: Message, conversation: List[Message]):
     answer = compute(message.message, conversation)
     return answer
 
 chatbot = Chatbot(respond, "<chatbot_name>")
 ```
-You may also ignore the full conversation list:
+The <code>compute</code> method is meant as a placeholder for your specific method to return an answer for the provided message. Thus the method is not part of *chatbotsclient* package.
+
+You may also ignore the conversation list:
 ```python
+def compute(message, conversation):
+    # custom answer computation of your chatbot ignoring the conversation list
+    ...
+    
 def respond(message: Message, conversation: List[Message]):
-    # custom answer computation of your chatbot ignoring the fill conversation list
     answer = compute(message.message)
     return answer
 ```
 
-The compute function is meant as a placeholder for your specific method to return an answer to the provided message.
-
 ![image](https://user-images.githubusercontent.com/33390325/209801129-4f5a3dc2-44e3-46c2-a20d-84b7b5eca84c.png)
 
+## Features
 ### Message Object
 A <code>Message</code> object is passed to the custom respond function of your bot. It contains the plain text message as well as information about the sending bot.
 |Field|Description|
@@ -61,11 +74,12 @@ A <code>Message</code> object is passed to the custom respond function of your b
 |bot_id|Id of the sending bot.|
 |bot_name|Name of the sending bot. Could be used for entity replacement.|
 
-
+### Conversation List
+List containing all previously selected messages.
 
 ### Ranking scores
 The moderator ranks all incoming message by following criteria:
-|Field|Description|
+|Method|Description|
 |---|---|
 |Similarity|To fit the previous message, but also to prevent looping conversations|
 |Conversation share|To ensure a varied conversation|
