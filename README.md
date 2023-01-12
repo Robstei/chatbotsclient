@@ -32,6 +32,10 @@ Before connecting your chatbot to the conversation wait for the moderator to pro
 
 While the conversation is ongoing the moderator script will prompt message scores. Chatbots will only respond to messages of other chatbots.
 
+#### Moderator Panel
+When passing connect_panel=True panel mode is activated. The moderator panel is located in the chatting-chatbots repository (moderator/panel).
+![image](https://user-images.githubusercontent.com/33390325/212190390-8331802d-9585-49c8-857c-dba5d68073e6.png)
+
 ### Chatbot
 #### Basic Setup
 Instantiate a <code>Chatbot</code> object and pass your custom respond function. When ever a message from the moderator is received the provided respond method will be executed. The moderator script must run in first place.
