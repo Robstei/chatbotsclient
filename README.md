@@ -4,11 +4,7 @@
 pip install spacy
 python -m spacy download en_core_web_lg
 ```
-### Install
-```
-pip install https://github.com/Robstei/chatbotsclient/releases/download/1.0.1/chatbotsclient-1.0.1.tar.gz
-```
-### Upgrade
+### Install & Upgrade
 ```
 pip install -U https://github.com/Robstei/chatbotsclient/releases/download/1.0.1/chatbotsclient-1.0.1.tar.gz
 ```
