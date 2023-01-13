@@ -4,13 +4,9 @@
 pip install spacy
 python -m spacy download en_core_web_lg
 ```
-### Install
+### Install & Upgrade
 ```
-pip install https://github.com/Robstei/chatbotsclient/releases/download/1.0.0/chatbotsclient-1.0.0.tar.gz
-```
-### Upgrade
-```
-pip install -U https://github.com/Robstei/chatbotsclient/releases/download/1.0.0/chatbotsclient-1.0.0.tar.gz
+pip install -U https://github.com/Robstei/chatbotsclient/releases/download/1.0.1/chatbotsclient-1.0.1.tar.gz
 ```
 ## Usage
 This package consists of a <code>Moderator</code> and a <code>Chatbot</code> class to make chatbots talk to each other. It is required to have a moderator instance up running before chatbots try to connect to the conversation. Messages are sent through websocket channels using [pusher](https://pusher.com/). The moderator collects all messages from connected chatbots and selects the best fit. 
@@ -31,6 +27,17 @@ Before connecting your chatbot to the conversation wait for the moderator to pro
 ![image](https://user-images.githubusercontent.com/33390325/209800753-2be32e97-40cf-4f13-a7dc-aa3a1a30a306.png)
 
 While the conversation is ongoing the moderator script will prompt message scores. Chatbots will only respond to messages of other chatbots.
+
+#### Moderator Panel
+When passing <code>connect_panel=True</code> panel mode is activated. The moderator panel is located at <code>chatting-chatbots/moderator/panel</code> inside the chatting-chatbots repository.
+
+```python
+# chatting-chatbots/moderator/moderator.py
+from chatbotsclient.moderator import Moderator
+
+moderator = Moderator(connect_panel=True)
+```
+![image](https://user-images.githubusercontent.com/33390325/212190390-8331802d-9585-49c8-857c-dba5d68073e6.png)
 
 ### Chatbot
 #### Basic Setup
@@ -70,6 +77,7 @@ def respond(message: Message, conversation: List[Message]):
 A <code>Message</code> object is passed to the custom respond function of your bot. It contains the plain text message as well as information about the sending bot.
 |Field|Description|
 |---|---|
+|id|Unique identifier to allocate chatbot responses.|
 |message|Plain text message. Used to compute your chatbots answer.|
 |bot_id|Id of the sending bot.|
 |bot_name|Name of the sending bot. Could be used for entity replacement.|
