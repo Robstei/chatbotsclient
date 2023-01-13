@@ -51,11 +51,6 @@ class Moderator:
             self.conversation, message)
         message.calculate_ranking_number()
 
-        print(f"{message.ranking_number} - {message.bot_name}")
-        print(
-            f"Similarity: {message.similarity_score}, Share: {message.share_score}, Topic: {message.topic_score}"
-        )
-
     def choose_next_message(self):
         next_message = evaluate.select_highest_rated_message(self.answers)
         self.conversation.append(next_message)
@@ -63,13 +58,11 @@ class Moderator:
         return next_message
 
     def make_elapsed(self, message_id=None):
-        if self.connect_panel:
-            self.panel = self.pysher_client.unsubscribe("private-panel")
-            self.panel = self.pysher_client.subscribe("private-panel")
-        self.elapsed = True
-        time.sleep(0.5)
-        if len(self.answers) > 0:
-            self.emit_message(self.choose_next_message())
+        if message_id == self.current_message.id:
+            self.elapsed = True
+            time.sleep(0.5)
+            if len(self.answers) > 0:
+                self.emit_message(self.choose_next_message())
 
     def wait_for_responses(self, message):
         if self.connect_panel:
@@ -98,24 +91,26 @@ class Moderator:
 
     def add_response(self, data):
         data = json.loads(data)
-        message = Message(
-            id=data["id"],
-            bot_id=data["bot_id"],
-            bot_name=data["bot_name"],
-            message=data["message"],
-        )
-        if self.elapsed is False:
-            self.calculate_message_ranking(message)
-            if self.connect_panel:
-                self.pusher_client.trigger(
-                    channels="private-panel",
-                    event_name="message-ranked",
-                    data={
-                        "message": self.current_message.to_json_event_string(), "response": message.to_json_event_string()},
-                )
-            self.answers.append(message)
-        else:
-            self.emit_message(message)
+        if data["responding_to"] == self.current_message.id:
+            response = json.loads(data["response"])
+            message = Message(
+                id=response["id"],
+                bot_id=response["bot_id"],
+                bot_name=response["bot_name"],
+                message=response["message"],
+            )
+            if self.elapsed is False:
+                self.calculate_message_ranking(message)
+                if self.connect_panel:
+                    self.pusher_client.trigger(
+                        channels="private-panel",
+                        event_name="message-ranked",
+                        data={
+                            "message": self.current_message.to_json_event_string(), "response": message.to_json_event_string()},
+                    )
+                self.answers.append(message)
+            else:
+                self.emit_message(message)
 
     def provoke_message(self, text):
         message = Message(

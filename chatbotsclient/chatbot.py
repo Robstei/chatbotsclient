@@ -57,12 +57,15 @@ class Chatbot:
             self.pusher_client.trigger(
                 channels="chatting-chatbots",
                 event_name=f"chatbot_response_{message.id}",
-                data=Message(
-                    id=str(uuid.uuid4()),
-                    bot_id=self.bot_id,
-                    bot_name=self.bot_name,
-                    message=response,
-                ).to_json_event_string(),
+                data={
+                    "responding_to": message.id,
+                    "response": Message(
+                        id=str(uuid.uuid4()),
+                        bot_id=self.bot_id,
+                        bot_name=self.bot_name,
+                        message=response,
+                    ).to_json_event_string()
+                },
             )
 
     def connect_handler(self, _):
