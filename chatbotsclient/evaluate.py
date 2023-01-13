@@ -1,8 +1,30 @@
 from typing import List
 import spacy
+import re
 from .message import Message
 
 nlp = spacy.load("en_core_web_lg")
+
+
+def handle_following_appostrophs(sentence):
+    sentence = re.sub(r" s ", "'s ", sentence)
+    sentence = re.sub(r" m ", "'m ", sentence)
+    sentence = re.sub(r" re ", "'re ", sentence)
+    sentence = re.sub(r" t ", "'t ", sentence)
+    return sentence
+
+
+def replace_after_sentence_sign(sentence):
+    for index, char in enumerate(sentence):
+        if char == "." or char == "?" or char == "!":
+            # space counts as char
+            if index + 2 < len(sentence):
+                sentence = (
+                    sentence[: index + 2]
+                    + sentence[index + 2].upper()
+                    + sentence[index + 3:]
+                )
+    return sentence
 
 
 def check_sentence_similarity(conversation: List[Message], message: Message, current_message: Message) -> None:
@@ -63,7 +85,9 @@ def select_highest_rated_message(ranked_messages: List[Message]):
 
 def lemmatize_message(message: Message) -> None:
     lemmatized_message = ""
-    message_doc = nlp(message.message)
+    corrected_message = handle_following_appostrophs(message.message)
+    corrected_message = replace_after_sentence_sign(corrected_message)
+    message_doc = nlp(corrected_message)
     for token in message_doc:
         lemmatized_message = lemmatized_message + token.lemma_ + " "
     message.message_lemma = lemmatized_message.strip().lower()
