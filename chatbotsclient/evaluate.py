@@ -1,6 +1,8 @@
 from typing import List
 import spacy
 import re
+from pke.unsupervised import TopicRank      # pip install git+https://github.com/boudinfl/pke.git
+from porter2stemmer import Porter2Stemmer   # pip install porter2stemmer
 from .message import Message
 
 nlp = spacy.load("en_core_web_lg")
@@ -156,7 +158,7 @@ def get_subjects_and_objects(sentence):
 
 
 # this does not really check for topics in the classic nlp way, but if sentence subjects or objects of a message fit the ones in the past conversation
-def check_topic_similarity(
+def check_object_subject_similarity(
     full_conversation: List[Message],
     possible_next_message: Message,
     window_size: int = 5,
@@ -194,3 +196,52 @@ def check_topic_similarity(
 
     # no match. Score is zero.
     possible_next_message.topic_score = 0
+
+
+# based on https://boudinfl.github.io/pke/build/html/unsupervised.html?highlight=rank#pke.unsupervised.TopicRank
+def check_topic_similarity(
+    full_conversation: List[Message],
+    possible_next_message: Message,
+    window_size: int = 0,
+): 
+    # create 1 continuous string from the conversation
+    conv = ''
+    for message in full_conversation[-window_size:]:
+        conv+= message.message + ' '
+
+    # create a TopicRank extractor
+    conv_extractor = TopicRank()
+
+    conv_extractor.load_document(
+        conv,
+        language='en',
+        normalization='stemming')
+
+    # select the keyphrase candidates, for TopicRank the longest sequences of 
+    # nouns and adjectives
+    conv_extractor.candidate_selection(pos={'NOUN', 'PROPN', 'ADJ'})
+
+    # weight the candidates using a random walk. The threshold parameter sets the
+    # minimum similarity for clustering, and the method parameter defines the 
+    # linkage method
+    conv_extractor.candidate_weighting(threshold=0.74,
+                                method='average')
+
+
+    # stem the message candidate (same stem-algorithm (Porter) as the one used in pke package)
+    stemmer = Porter2Stemmer()
+    msg_doc = nlp(possible_next_message.message)
+    msg_stems = []
+    for token in msg_doc:
+        stem = stemmer.stem(token.text.lower())
+        msg_stems.append(stem)
+
+    topic_score = 0
+    # check if any of the message stems are part of the top 10 conversation topics
+    for (keyphrase, score) in conv_extractor.get_n_best(n=10, stemming=True):
+        if keyphrase in msg_stems:
+            # the more stems match the higher the score 
+            topic_score += score
+
+    possible_next_message.topic_score = topic_score
+    return topic_score
