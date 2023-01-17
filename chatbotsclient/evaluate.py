@@ -1,9 +1,14 @@
 from typing import List
 import spacy
 import re
-from pke.unsupervised import TopicRank      # pip install git+https://github.com/boudinfl/pke.git
-from porter2stemmer import Porter2Stemmer   # pip install porter2stemmer
 from .message import Message
+# pip install git+https://github.com/boudinfl/pke.git
+from pke.unsupervised import TopicRank
+from porter2stemmer import Porter2Stemmer   # pip install porter2stemmer
+import nltk
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+nltk.download('vader_lexicon')
+nltk.download('vader_lexicon')
 
 nlp = spacy.load("en_core_web_lg")
 
@@ -41,6 +46,18 @@ def check_sentence_similarity(conversation: List[Message], message: Message, cur
     # treshhold if sentences are to similar or loop happend
     if similarity > 0.95 or loop_checker(conversation, message.message):
         message.similarity_score = -5.0 + similarity
+
+
+def check_polarity_similarity(response: Message, current_message: Message) -> None:
+    """Check Sentinemt"""
+    analyzer = SentimentIntensityAnalyzer()
+    response_polarity = analyzer.polarity_scores(response.message)["compound"]
+    current_message_polarity = analyzer.polarity_scores(current_message.message)[
+        "compound"]
+    diff = response_polarity - current_message_polarity
+    positive_diff = -diff if diff < 0 else diff
+    inverse_diff = 1 - positive_diff
+    response.polarity_score = inverse_diff
 
 
 def loop_checker(
@@ -203,11 +220,11 @@ def check_topic_similarity(
     full_conversation: List[Message],
     possible_next_message: Message,
     window_size: int = 0,
-): 
+):
     # create 1 continuous string from the conversation
     conv = ''
     for message in full_conversation[-window_size:]:
-        conv+= message.message + ' '
+        conv += message.message + ' '
 
     # create a TopicRank extractor
     conv_extractor = TopicRank()
@@ -217,16 +234,15 @@ def check_topic_similarity(
         language='en',
         normalization='stemming')
 
-    # select the keyphrase candidates, for TopicRank the longest sequences of 
+    # select the keyphrase candidates, for TopicRank the longest sequences of
     # nouns and adjectives
     conv_extractor.candidate_selection(pos={'NOUN', 'PROPN', 'ADJ'})
 
     # weight the candidates using a random walk. The threshold parameter sets the
-    # minimum similarity for clustering, and the method parameter defines the 
+    # minimum similarity for clustering, and the method parameter defines the
     # linkage method
     conv_extractor.candidate_weighting(threshold=0.74,
-                                method='average')
-
+                                       method='average')
 
     # stem the message candidate (same stem-algorithm (Porter) as the one used in pke package)
     stemmer = Porter2Stemmer()
@@ -240,7 +256,7 @@ def check_topic_similarity(
     # check if any of the message stems are part of the top 10 conversation topics
     for (keyphrase, score) in conv_extractor.get_n_best(n=10, stemming=True):
         if keyphrase in msg_stems:
-            # the more stems match the higher the score 
+            # the more stems match the higher the score
             topic_score += score
 
     possible_next_message.topic_score = topic_score

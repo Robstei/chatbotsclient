@@ -12,8 +12,10 @@ class Message:
         self.__similarity_score = 0.0
         self.__share_score = 0.0
         self.__topic_score = 0.0
+        self.__polarity_score = 0.0
 
     # region getters
+
     @property
     def id(self):
         return self.__id
@@ -47,6 +49,10 @@ class Message:
         return self.__topic_score
 
     @property
+    def polarity_score(self):
+        return self.__polarity_score
+
+    @property
     def message_lemma(self):
         return self.__message_lemma
 
@@ -70,6 +76,10 @@ class Message:
     def topic_score(self, value):
         self.__topic_score = value
 
+    @polarity_score.setter
+    def polarity_score(self, value):
+        self.__polarity_score = value
+
     @message_lemma.setter
     def message_lemma(self, value):
         self.__message_lemma = value
@@ -82,11 +92,13 @@ class Message:
         similarity_weight: float = 1,
         share_weight: float = 1,
         topic_weight: float = 1,
+        polarity_weight: float = 1,
     ):
         self.__ranking_number = (
             similarity_weight * self.__similarity_score
             + share_weight * self.__share_score
             + topic_weight * self.__topic_score
+            + polarity_weight * self.__polarity_score
         )
 
     def to_json_event_string(self) -> str:
@@ -100,6 +112,7 @@ class Message:
                 "topic_score": self.topic_score,
                 "similarity_score": self.similarity_score,
                 "share_score": self.share_score,
+                "polarity_score": self.polarity_score,
                 "ranking_number": self.ranking_number,
                 "message_lemma": self.message_lemma,
             }

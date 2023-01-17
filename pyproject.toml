@@ -4,5 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "chatbotsclient"
-version = "1.0.2"
-dependencies = ["pusher", "pysher", "spacy", "Flask", "Flask-Cors"]
+version = "1.0.4"
+dependencies = [
+    "pusher", 
+    "pysher", 
+    "spacy", 
+    "Flask",
+    "Flask-Cors", 
+    "porter2stemmer",
+    "pke @ git+ssh://git@github.com/boudinfl/pke.git",
+    "nltk"
+]

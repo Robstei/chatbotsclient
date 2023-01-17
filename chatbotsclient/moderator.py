@@ -37,7 +37,6 @@ class Moderator:
         self.current_message = None
         self.connect_panel = connect_panel
         self.init_connection()
-
         while True:
             time.sleep(1)
 
@@ -49,6 +48,7 @@ class Moderator:
             self.conversation, message)
         evaluate.check_topic_similarity(
             self.conversation, message)
+        evaluate.check_polarity_similarity(message, self.current_message)
         message.calculate_ranking_number()
 
     def choose_next_message(self):
