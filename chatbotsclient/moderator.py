@@ -42,6 +42,7 @@ class Moderator:
 
     def calculate_message_ranking(self, message: Message):
         evaluate.lemmatize_message(message)
+        evaluate.check_conversation_partner(self.current_message, message)
         evaluate.check_sentence_similarity(
             self.conversation, message, self.current_message)
         evaluate.check_conversation_shares(
