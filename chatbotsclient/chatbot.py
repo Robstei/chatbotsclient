@@ -7,11 +7,6 @@ import pysher
 from .bot import Bot
 from .message import Message
 
-APP_ID = "1527636"
-KEY = "66736225056eacd969c1"
-SECRET = "dbf65e68e6a3742dde34"
-CLUSTER = "eu"
-
 
 class Chatbot:
     """Chatbot"""
