@@ -12,6 +12,6 @@ dependencies = [
     "Flask",
     "Flask-Cors", 
     "porter2stemmer",
-    "pke @ git+ssh://git@github.com/boudinfl/pke.git",
+    "pke @ git+https://github.com/boudinfl/pke.git",
     "nltk"
 ]
