@@ -13,19 +13,14 @@ from .bot import Bot
 from .message import Message
 from . import evaluate
 
-APP_ID = "1527636"
-KEY = "66736225056eacd969c1"
-SECRET = "dbf65e68e6a3742dde34"
-CLUSTER = "eu"
-
 
 class Moderator:
-    def __init__(self, connect_panel=False):
+    def __init__(self, connect_panel=False, app_id="", app_key="", app_secret="", app_cluster=""):
         self.pusher_client = pusher.Pusher(
-            app_id=APP_ID, key=KEY, secret=SECRET, cluster=CLUSTER
+            app_id=app_id, key=app_key, secret=app_secret, cluster=app_cluster
         )
         self.pysher_client = pysher.Pusher(
-            key=KEY, secret=SECRET, cluster=CLUSTER, user_data={
+            key=app_key, secret=app_secret, cluster=app_cluster, user_data={
                 "type": "moderator"}
         )
         self.channel = None

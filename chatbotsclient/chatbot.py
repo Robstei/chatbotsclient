@@ -21,18 +21,19 @@ class Chatbot:
         respond_method: Callable[[Message, List[Message]], str],
         name: str,
         method: Union[str, None] = None,
+        app_id="", app_key="", app_secret="", app_cluster=""
     ):
         self.pusher_client = pusher.Pusher(
-            app_id=APP_ID, key=KEY, secret=SECRET, cluster=CLUSTER
+            app_id=app_id, key=app_key, secret=app_secret, cluster=app_cluster
         )
         self.bot_id = None
         self.bot_name = name
         self.method = method
         self.channel = None
         self.pysher_client = pysher.Pusher(
-            key=KEY,
-            secret=SECRET,
-            cluster=CLUSTER,
+            key=app_key,
+            secret=app_secret,
+            cluster=app_cluster,
             user_data={"type": "chatbot", "name": self.bot_name},
         )
         self.elapsed = False
