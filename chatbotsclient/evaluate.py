@@ -33,6 +33,9 @@ def replace_after_sentence_sign(sentence):
                 )
     return sentence
 
+def check_conversation_partner(current_message: Message, message: Message, bot_name: Message.bot_name) -> None:
+    if(bot_name in current_message):
+        message.conversation_partner_score = 1.0
 
 def check_sentence_similarity(conversation: List[Message], message: Message, current_message: Message) -> None:
     """Check Conversation Shares"""
@@ -63,7 +66,7 @@ def check_polarity_similarity(response: Message, current_message: Message) -> No
 def loop_checker(
     full_conversation: List[Message],
     possible_next_message: Message,
-    window_size: int = 3,
+    window_size: int = 20,
 ):
     """Checks if message was already found in conversation (depends on window_size)"""
     for message in full_conversation[-window_size:]:
