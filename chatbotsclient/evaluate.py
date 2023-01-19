@@ -33,9 +33,11 @@ def replace_after_sentence_sign(sentence):
                 )
     return sentence
 
-def check_conversation_partner(current_message: Message, message: Message, bot_name: Message.bot_name) -> None:
-    if(bot_name in current_message):
+
+def check_conversation_partner(current_message: Message, message: Message) -> None:
+    if(message.bot_name in current_message):
         message.conversation_partner_score = 1.0
+
 
 def check_sentence_similarity(conversation: List[Message], message: Message, current_message: Message) -> None:
     """Check Conversation Shares"""
