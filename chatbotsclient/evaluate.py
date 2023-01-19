@@ -35,7 +35,7 @@ def replace_after_sentence_sign(sentence):
 
 
 def check_conversation_partner(current_message: Message, message: Message) -> None:
-    if(message.bot_name in current_message):
+    if message.bot_name in current_message.message:
         message.conversation_partner_score = 1.0
 
 

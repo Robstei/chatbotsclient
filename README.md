@@ -10,7 +10,7 @@ python -m spacy download en_core_web_lg
 ### Install & Upgrade
 
 ```
-pip install -U https://github.com/Robstei/chatbotsclient/releases/download/1.0.4/chatbotsclient-1.0.4.tar.gz
+pip install -U https://github.com/Robstei/chatbotsclient/releases/download/1.0.5/chatbotsclient-1.0.5.tar.gz
 ```
 
 ## Usage
