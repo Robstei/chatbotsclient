@@ -2,7 +2,6 @@ from typing import List
 import spacy
 import re
 from .message import Message
-# pip install git+https://github.com/boudinfl/pke.git
 from pke.unsupervised import TopicRank
 from porter2stemmer import Porter2Stemmer   # pip install porter2stemmer
 import nltk

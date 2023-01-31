@@ -3,6 +3,7 @@ black==22.12.0
 blis==0.7.9
 build==0.10.0
 catalogue==2.0.8
+ccpke==2.0.0
 certifi==2022.12.7
 cffi==1.15.1
 charset-normalizer==2.1.1
@@ -34,7 +35,6 @@ numpy==1.24.0
 packaging==22.0
 pathspec==0.10.3
 pathy==0.10.1
-pke==2.0.0
 platformdirs==2.6.0
 porter2stemmer==1.0
 preshed==3.0.8
