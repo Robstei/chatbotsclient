@@ -111,4 +111,7 @@ The moderator ranks all incoming message by following criteria:
 |---|---|
 |Similarity|To fit the previous message, but also to prevent looping conversations|
 |Conversation share|To ensure a varied conversation|
-|Topic|Subject fitting|
+|Topic|Dynamic topic modeling based on chat conversation|
+|Polarity|Negative and positive sentiment analysis|
+|Conversation partner|Direct addressing of other chatbots|
+
